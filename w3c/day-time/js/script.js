@@ -11,6 +11,20 @@ function refreshTime() {
     6: 'Saturday'
   }
 
+  let monthMapping = {
+    0: 'Jan',
+    1: 'Feb',
+    2: 'Mar',
+    3: 'Apr',
+    4: 'May',
+    5: 'Jun',
+    6: 'Jul',
+    7: 'Aug',
+    8: 'Sep',
+    9: 'Oct',
+    10: 'Nov',
+    11: 'Dec',
+  }
 
   // good ref https://stackoverflow.com/a/10211214
   let currentdate = new Date();
@@ -21,7 +35,10 @@ function refreshTime() {
     getFullYear() returns 4-digit year
 
   */
-  let hour = currentdate.getHours()
+  let dayNum = currentdate.getDate();
+  let month = monthMapping[currentdate.getMonth()];
+  let year = currentdate.getFullYear();
+  let hour = currentdate.getHours();
   let dayHalf = ' AM ';
   if (hour >= 12) {
     hour -= 12;
@@ -29,11 +46,23 @@ function refreshTime() {
   }
 
   let day = dayMapping[currentdate.getDay()];
-  let time = " " + hour + dayHalf + ": "
-                + currentdate.getMinutes() + " : "
-                + currentdate.getSeconds();
 
-  let htmlStrings = ['Today is: ', day, '.<br>Current time is : ', time];
+  let minutes = currentdate.getMinutes() + '';
+  minutes = minutes.padStart(2, '0');
+  let seconds = currentdate.getSeconds() + '';
+  seconds = seconds.padStart(2, '0');
+
+  let time = " " + hour + dayHalf + ": "
+                + minutes + " : "
+                + seconds;
+
+  let htmlStrings = [
+    'Today is: ',
+    day, ', ', dayNum, ' ', month, ' ', year,
+    '.<br>Current time is : ',
+    time
+  ];
+
   timeDiv.innerHTML = '';
   for (i=0; i < htmlStrings.length; i++) {
     timeDiv.innerHTML += htmlStrings[i]
