@@ -1,0 +1,17 @@
+body {
+  margin: 55pt;
+}
+
+div {
+  width: 400px;
+  padding: 12pt;
+}
+
+input {
+  padding: 6pt;
+}
+
+label {
+  font-family: Verdana, Arial, Tahoma, Serif;
+  font-weight: 900;
+}
